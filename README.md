@@ -1,14 +1,14 @@
 # CSI2132_CourseProject
 Hotel Management Web App
-## Technologies
-Using PERN stack (PostgreSQL, Express.js, React, Node.js)
 
-#Basic overview:
+
+# Basic overview:
 DB setup (schema, relations, seed data) in **backend > db.sql**
 DB queries (transform room booking to room renting, views, etc) in **root > db_methods.sql**
    These will eventually be translated into routes in **backend > index.js** under the Routes header
 
-
+## Technologies
+Using PERN stack (PostgreSQL, Express.js, React, Node.js)
 
 ## First-time Setup
 1. **Install Node.js and npm**:
