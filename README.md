@@ -54,3 +54,4 @@ Using PERN stack (PostgreSQL, Express.js, React, Node.js)
 6. **Access the Application**:
    - Open a web browser and navigate to `http://localhost:3000` to access the frontend of the application.
    - If the backend is running successfully, it should be accessible at `http://localhost:5000`.
+
