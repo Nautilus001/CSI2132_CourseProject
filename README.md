@@ -3,6 +3,13 @@ Hotel Management Web App
 ## Technologies
 Using PERN stack (PostgreSQL, Express.js, React, Node.js)
 
+#Basic overview:
+DB setup (schema, relations, seed data) in **backend > db.sql**
+DB queries (transform room booking to room renting, views, etc) in **root > db_methods.sql**
+   These will eventually be translated into routes in **backend > index.js** under the Routes header
+
+
+
 ## First-time Setup
 1. **Install Node.js and npm**:
    - Download and install [Node.js](https://nodejs.org/) from the official website.
