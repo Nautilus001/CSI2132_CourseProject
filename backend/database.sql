@@ -1,4 +1,4 @@
-CREATE DATABASE hotelapp;
+CREATE DATABASE IF NOT EXISTS hotelapp;
 
 CREATE TABLE HotelChains (
     ChainID INT  PRIMARY KEY,
