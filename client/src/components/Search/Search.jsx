@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 
-const InputHotel = () => {
+const Search = () => {
 
     const [description, setDescription] = useState("Add Hotel");
 
@@ -38,4 +38,4 @@ const InputHotel = () => {
     )
 }
 
-export default InputHotel;
+export default Search;
