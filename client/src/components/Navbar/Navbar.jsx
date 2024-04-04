@@ -1,55 +1,58 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import styles from "./styles.module.css";
+import React, { useContext } from "react";
+import { HotelsContext } from "../../context/HotelsContext";
+import { Link } from "react-router-dom";
 
-const Navbar = ({ role, onHomeClick }) => {
-    console.log("Role in Navbar:", role);
+const Navbar = () => {
+
+    const { user_role } = useContext(HotelsContext);
+
+    console.log("User_role in Navbar:", user_role);
+
     return (
         <nav className="navbar navbar-expand-sm bg-light px-4 shadow h5">
             <div className="container-fluid">
                 <ul className="navbar-nav">
                     <li className="nav-item px-2">
-                    <a className="nav-link" href="/welcome">Home</a>
+                        <Link to="/welcome" className="nav-link">Home</Link>
                     </li>
                 </ul>
             </div>
             <div className="container-fluid justify-content-end g-5">
                 <ul className="navbar-nav">
-                    {role >= 0 && (
+                    {user_role >= 0 && (
                         <ul className="navbar-nav">
                             <li className="nav-item px-2">
-                                <a className="nav-link" href="/booknow">Book Now!</a>
+                                <Link to="/booknow" className="nav-link">Book Now!</Link>                            
                             </li>
                             <li className="nav-item px-2">
-                                <a className="nav-link" href="/mybookings">My Bookings</a>
+                                <Link to="/mybookings" className="nav-link">My Bookings</Link>                            
                             </li>
                         </ul>
                     )}
-                    {role >= 1 && (
+                    {user_role >= 1 && (
                         <ul className="navbar-nav">
                             <li className="nav-item px-2">
-                                <a className="nav-link" href="/rooms">Rooms</a>
+                                <Link to="/rooms" className="nav-link">Rooms</Link>
                             </li>
                             <li className="nav-item px-2">
-                                <a className="nav-link" href="/bookings">Bookings</a>
+                                <Link to="/bookings" className="nav-link">Bookings</Link>
                             </li>
                             <li className="nav-item px-2">
-                                <a className="nav-link" href="/customers">Customers</a>
+                                <Link to="/customers" className="nav-link">Customers</Link>
                             </li>
                         </ul>               
                     )}
-                    {role >= 2 && (
+                    {user_role >= 2 && (
                         <ul className="navbar-nav">
                             <li className="nav-item px-2">
-                            <a className="nav-link" href="/employees">Employees</a>
+                                <Link to="/employees" className="nav-link">Employees</Link>
                             </li>
                             <li className="nav-item px-2">
-                            <a className="nav-link" href="/hotels">Hotels</a>
+                                <Link to="/hotels" className="nav-link">Hotels</Link>
                             </li>  
                         </ul>          
                     )}
                 </ul>
-                
             </div>
         </nav>
     )
