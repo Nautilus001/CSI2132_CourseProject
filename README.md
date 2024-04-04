@@ -1,7 +1,7 @@
 # CSI2132_CourseProject
 Hotel Management Web App
 
-# Video Link: https://www.youtube.com/watch?v=jQp7h-C48Yw
+# Video Link: https://www.youtube.com/watch?v=jQp7h-C48Yw NOTE: Had audio issues, please turn up the volume!
 
 ## The Team:
 - Justin Bushfield (300188318) - Web Design
