@@ -1,6 +1,11 @@
 # CSI2132_CourseProject
 Hotel Management Web App
 
+## The Team:
+Justin Bushfield (300188318) - Web Design
+Yasmine Hallak - Database Master
+Jean Alexandre Alloh - Team Glue and Fixit Extraordinaire
+
 
 # Basic overview:
 DB setup (schema, relations, seed data) in **backend > db.sql**
