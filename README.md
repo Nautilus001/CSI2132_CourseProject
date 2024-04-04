@@ -1,6 +1,8 @@
 # CSI2132_CourseProject
 Hotel Management Web App
 
+# Video Link: https://www.youtube.com/watch?v=jQp7h-C48Yw
+
 ## The Team:
 - Justin Bushfield (300188318) - Web Design
 - Yasmine Hallak - Database Master
