@@ -6,32 +6,32 @@ import HomePage from "./Routes/HomePage/HomePage";
 import Navbar from "./components/Navbar/Navbar";
 import { HotelsContextProvider } from "./context/HotelsContext";
 import BookNowView from "./Routes/BookNowView/BookNowView";
-import RoomsView from "./Routes/RoomsView/RoomsView";
+import InfoView from "./Routes/InfoView/InfoView";
 
 const App = () => {
-  const [user_role, setUserRole] = useState(0);
+  //const [user_role, setUserRole] = useState(0);
 
-  const handleRoleAssignment = (value) => {
-    setUserRole(value);
-  };
+  // const handleRoleAssignment = (value) => {
+  //   setUserRole(value);
+  // };
 
-  const handleRoleReset = () => {
-    setUserRole(0);
-  };
+  // const handleRoleReset = () => {
+  //   setUserRole(0);
+  // };
 
   return (
       <HotelsContextProvider>
         <BrowserRouter>
-            <Navbar role={user_role} onHomeClick={handleRoleReset}/>
+            <Navbar/>
             <div className="container mt-5">
                 <Routes>
                   <Route 
                     exact path="/welcome" 
-                    element={<HomePage setRole={handleRoleAssignment} />} 
+                    element={<HomePage/>} 
                   />
                   <Route path="/booknow" element={<BookNowView />} />
                   <Route path="/employee" element={<BookNowView />} />
-                  <Route path="/employee/rooms" element={<RoomsView />} />
+                  <Route path="/employee/rooms" element={<InfoView />} />
                 </Routes>
             </div>
         </BrowserRouter>

@@ -1,9 +1,14 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import styles from "./styles.module.css";
+import React, { useContext } from "react";
+import { HotelsContext } from "../../context/HotelsContext";
 
-const Navbar = ({ role, onHomeClick }) => {
-    console.log("Role in Navbar:", role);
+const Navbar = ({}) => {
+
+    const {user_role, setUserRole} = useContext(HotelsContext);
+
+    let role = user_role;
+
+    console.log("Role in Navbar:", user_role);
+
     return (
         <nav className="navbar navbar-expand-sm bg-light px-4 shadow h5">
             <div className="container-fluid">

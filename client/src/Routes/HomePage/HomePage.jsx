@@ -1,12 +1,17 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useContext } from "react";
+import { HotelsContext } from "../../context/HotelsContext";
 import { useNavigate } from "react-router-dom";
 
 
-const HomePage = ({ setRole }) => {
-    const navigate = useNavigate();
 
-    const handleRoleClick = (value) => {
-        setRole(value);
+const HomePage = () => {
+    const navigate = useNavigate();
+    const { user_role, setUserRole } = useContext(HotelsContext);
+
+    let role = user_role;
+
+    const handleRoleAssignment = (value) => {
+        setUserRole(value);
         switch(value) {
             case 0:
                 navigate("/booknow");
@@ -31,17 +36,17 @@ const HomePage = ({ setRole }) => {
             <div className="row"></div> 
             <div className="row py-5">
                 <div className="col d-flex flex-column justify-content-center">
-                <div className="btn btn-success p-5" onClick={() => handleRoleClick(0)}> 
+                <div className="btn btn-success p-5" onClick={() => handleRoleAssignment(0)}> 
                         <div className="h2">Customer</div> 
                     </div>
                 </div>
                 <div className="col d-flex flex-column justify-content-center">
-                    <div className="btn btn-primary p-5" onClick={() => handleRoleClick(1)}> 
+                    <div className="btn btn-primary p-5" onClick={() => handleRoleAssignment(1)}> 
                         <div className="h2">Employee</div>
                     </div>  
                 </div>
                 <div className="col d-flex flex-column justify-content-center">
-                    <div className="btn btn-danger p-5" onClick={() => handleRoleClick(2)}> 
+                    <div className="btn btn-danger p-5" onClick={() => handleRoleAssignment(2)}> 
                         <div className="h2">Admin</div> 
                     </div>                
                 </div> 

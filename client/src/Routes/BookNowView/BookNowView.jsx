@@ -1,11 +1,13 @@
 import React, { useEffect, useContext } from "react";
 import { HotelsContext } from "../../context/HotelsContext";
 import HotelSearch from "../../apis/HotelSearch";
+import { useNavigate } from "react-router-dom";
 
-const BookNowView = ( props ) => {
+const BookNowView = ( ) => {
 
     const {rooms, setRooms} = useContext(HotelsContext);
     const {inputs, setInputs} = useContext(HotelsContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
         
@@ -31,6 +33,10 @@ const BookNowView = ( props ) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(inputs);
+    }
+
+    const handleRoomClick = (value) => {
+        navigate(`/${value}/info`);
     }
 
     function extractCityName(address) {
@@ -208,7 +214,7 @@ const BookNowView = ( props ) => {
                     <tbody>
                         {rooms.map((room) => {
                             return(
-                                <tr>
+                                <tr onClick={()=>{handleRoomClick(room.roomid)}} style={{cursor: "pointer"}}>
                                     <td className="align-middle">
                                         <div>
                                             <div>{room.hotelname}</div>

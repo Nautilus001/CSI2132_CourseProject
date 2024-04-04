@@ -5,6 +5,7 @@ export const HotelsContext = createContext();
 export const HotelsContextProvider = (props) => {
     const [rooms, setRooms] = useState([]);
     const [selectedRoom, setSelectedRoom] = useState(null);
+    const [user_role, setUserRole] = useState(0);
 
     const [inputs, setInputs] = useState({
         checkin: null,
@@ -23,6 +24,8 @@ export const HotelsContextProvider = (props) => {
             setRooms: setRooms,
             inputs: inputs,
             setInputs: setInputs,
+            user_role: user_role,
+            setUserRole: setUserRole,
         }}>
             {props.children} 
         </HotelsContext.Provider>
