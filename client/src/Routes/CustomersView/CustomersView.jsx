@@ -6,7 +6,7 @@ import HotelSearch from "../../apis/HotelSearch";
 
 const CustomersView = () => {
 
-    const { setSelectedCustomers } = useContext(HotelsContext);
+    const { setSelectedCustomer } = useContext(HotelsContext);
     const { setInfoType } = useContext(HotelsContext);
     const { customers, setCustomers } = useContext(HotelsContext);
 
@@ -25,9 +25,9 @@ const CustomersView = () => {
     },[]);
 
     const handleClick = (cus) => {
-        setSelectedCustomers(cus)
+        setSelectedCustomer(cus)
         setInfoType("customer")
-        navigate(`/${cus.id}/info`);
+        navigate(`/${cus.customerid}/info`);
     }
 
     return (

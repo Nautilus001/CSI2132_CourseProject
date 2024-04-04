@@ -44,7 +44,7 @@ CREATE TABLE Customers (
 CREATE TABLE Rooms (
     RoomID SERIAL PRIMARY KEY,
     HotelID INT,
-    RoomNumber VARCHAR(20),
+    RoomNumber INT,
     PricePerNight DECIMAL(10, 2),
     Capacity INT,
     Seaview BOOLEAN,

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import HotelSearch from "../../apis/HotelSearch";
 
 
-const HotelsView = () => {
+const BookingsView = () => {
 
     const { setSelectedBooking } = useContext(HotelsContext);
     const { setInfoType } = useContext(HotelsContext);
@@ -22,7 +22,7 @@ const HotelsView = () => {
             }
         }
         fetchData();
-    },[]);
+    },[setSelectedBooking]);
 
     const handleClick = (b) => {
         setSelectedBooking(b)
@@ -64,4 +64,4 @@ const HotelsView = () => {
     )
 }
 
-export default HotelsView;
+export default BookingsView;

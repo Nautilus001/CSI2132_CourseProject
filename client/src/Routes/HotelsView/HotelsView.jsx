@@ -22,12 +22,26 @@ const HotelsView = () => {
             }
         }
         fetchData();
-    },[]);
+    },[setSelectedHotel]);
 
     const handleClick = (h) => {
         setSelectedHotel(h)
         setInfoType("hotel")
         navigate(`/${h.hotelid}/info`);
+    }
+
+    function starsOutOfFive(n) {
+        if (typeof n !== 'number' || isNaN(n) || n < 0 || n > 5) {
+            return 'Invalid input. Please provide a number between 0 and 5.';
+        }
+    
+        const solidStars = '★'.repeat(n);
+    
+        const emptyStars = '☆'.repeat(5 - n);
+    
+        const stars = solidStars + emptyStars;
+    
+        return stars;
     }
 
     return (
@@ -52,7 +66,7 @@ const HotelsView = () => {
                                 <td>{h.hotelid}</td>
                                 <td>{h.hotelname}</td>
                                 <td>{h.chainname}</td>
-                                <td>{h.category}</td>
+                                <td>{starsOutOfFive(h.category)}</td>
                                 <td>{h.hoteladdress}</td>
                                 <td>{h.numrooms}</td>
                                 <td>{h.contactemail}</td>

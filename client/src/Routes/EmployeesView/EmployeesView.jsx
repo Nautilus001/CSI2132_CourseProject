@@ -22,7 +22,7 @@ const EmployeesView = () => {
             }
         }
         fetchData();
-    },[]);
+    },[setSelectedEmployee]);
 
     const handleClick = (emp) => {
         setSelectedEmployee(emp)

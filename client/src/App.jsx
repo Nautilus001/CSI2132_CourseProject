@@ -13,6 +13,7 @@ import CustomersView from "./Routes/CustomersView/CustomersView";
 import HotelsView from "./Routes/HotelsView/HotelsView";
 import BookingsView from "./Routes/BookingsView/BookingsView";
 import RoomsView from "./Routes/RoomsView/RoomsView";
+import MyBookingsView from "./Routes/MyBookingsView/MyBookingsView";
 
 const App = () => {
 
@@ -31,6 +32,7 @@ const App = () => {
                   <Route path="/booknow" element={<BookNowView />} />
                   <Route path="/:id/info" element={<InfoView />} />
                   <Route path="/:id/update" element={<UpdateView />} />
+                  <Route path="/mybookings" element={<MyBookingsView />} />
                 </Routes>
             </div>
         </BrowserRouter>

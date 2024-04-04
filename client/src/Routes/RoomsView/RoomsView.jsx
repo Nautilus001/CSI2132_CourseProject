@@ -6,9 +6,10 @@ import HotelSearch from "../../apis/HotelSearch";
 
 const RoomsView = () => {
 
-    const { setSelectedRoom } = useContext(HotelsContext);
+    const { selectedRoom, setSelectedRoom } = useContext(HotelsContext);
     const { setInfoType } = useContext(HotelsContext);
     const { rooms, setRooms } = useContext(HotelsContext);
+    const { updateRequired } = useContext(HotelsContext);
 
     const navigate = useNavigate();
 
@@ -22,7 +23,7 @@ const RoomsView = () => {
             }
         }
         fetchData();
-    },[]);
+    }, [selectedRoom]);
 
     const handleClick = (r) => {
         setSelectedRoom(r)
@@ -55,17 +56,19 @@ const RoomsView = () => {
             <table className="table table-hover">
                 <thead className="bg-secondary" style={{ position: "sticky", top: 0 }}>
                     <tr>
+                        <td>Room ID</td>
                         <td>Hotel</td>
+                        <td>Room Number</td>
                         <td>Capacity</td>
                         <td>Views</td>
                         <td>Price</td>
-                        <td></td>
                     </tr>
                 </thead>
                 <tbody>
                     {rooms.map((room) => {
                             return(
                                 <tr onClick={()=>{handleClick(room)}} style={{cursor: "pointer"}}>
+                                    <td>{room.roomid}</td>
                                     <td className="align-middle">
                                         <div>
                                             <div>{room.hotelname}</div>
@@ -73,6 +76,7 @@ const RoomsView = () => {
                                             <div>{starsOutOfFive(room.category)}</div>
                                         </div>
                                     </td>
+                                    <td>{room.roomnumber}</td>
                                     <td className="align-middle">{room.capacity}</td>
                                     <td className="align-middle">
                                         <div>
