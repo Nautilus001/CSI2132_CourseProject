@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import GlobalLandingPage from "./Pages/GlobalLandingPage/GlobalLandingPage";
-import EmployeeLandingPage from "./Pages/EmployeeLandingPage/EmployeeLandingPage";
+import HomePage from "./Routes/HomePage/HomePage";
 import Navbar from "./components/Navbar/Navbar";
-import SearchPage from "./Pages/SearchPage/SearchPage";
+import { HotelsContextProvider } from "./context/HotelsContext";
+import BookNowView from "./Routes/BookNowView/BookNowView";
+import RoomsView from "./Routes/RoomsView/RoomsView";
 
-function App() {
+const App = () => {
   const [user_role, setUserRole] = useState(0);
 
   const handleRoleAssignment = (value) => {
@@ -18,22 +20,22 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
-      <div className="page">
-        <Navbar role={user_role} onHomeClick={handleRoleReset}/>
-        <div className="body">
-            <Routes>
-              <Route 
-                exact path="/welcome" 
-                element={<GlobalLandingPage setRole={handleRoleAssignment} />} 
-              />
-              <Route path="/search" element={<SearchPage />} />
-              <Route exact path="/employee/" element={<EmployeeLandingPage />} />
-              <Route path="/search" element={<SearchPage />} />
-            </Routes>
-        </div>
-      </div>
-    </BrowserRouter>
+      <HotelsContextProvider>
+        <BrowserRouter>
+            <Navbar role={user_role} onHomeClick={handleRoleReset}/>
+            <div className="container mt-5">
+                <Routes>
+                  <Route 
+                    exact path="/welcome" 
+                    element={<HomePage setRole={handleRoleAssignment} />} 
+                  />
+                  <Route path="/booknow" element={<BookNowView />} />
+                  <Route path="/employee" element={<BookNowView />} />
+                  <Route path="/employee/rooms" element={<RoomsView />} />
+                </Routes>
+            </div>
+        </BrowserRouter>
+      </HotelsContextProvider>
   );
 }
 
