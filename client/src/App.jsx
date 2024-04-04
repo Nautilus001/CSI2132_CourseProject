@@ -22,17 +22,14 @@ const App = () => {
             <Navbar/>
             <div className="container mt-5">
                 <Routes>
-                  <Route 
-                    exact path="/welcome" 
-                    element={<HomePage/>} 
-                  />
-                  <Route path="/booknow" element={<BookNowView />} />
+                  <Route path="/welcome" element={<HomePage />} />
                   <Route path="/employees" element={<EmployeesView />} />
                   <Route path="/rooms" element={<RoomsView />} />
                   <Route path="/customers" element={<CustomersView />} />
                   <Route path="/bookings" element={<BookingsView />} />
                   <Route path="/hotels" element={<HotelsView />} />
-                  <Route exact path="/:id/info" element={<InfoView />} />
+                  <Route path="/booknow" element={<BookNowView />} />
+                  <Route path="/:id/info" element={<InfoView />} />
                   <Route path="/:id/update" element={<UpdateView />} />
                 </Routes>
             </div>

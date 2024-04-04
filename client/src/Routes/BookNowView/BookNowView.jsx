@@ -7,9 +7,8 @@ const BookNowView = ( ) => {
 
     const {rooms, setRooms} = useContext(HotelsContext);
     const {inputs, setInputs} = useContext(HotelsContext);
-    const {selectedRoom, setSelectedRoom} = useContext(HotelsContext);
-    const {user_role, setUserRole} = useContext(HotelsContext);
-    const {infoType, setInfoType} = useContext(HotelsContext);
+    const {setSelectedRoom} = useContext(HotelsContext);
+    const {setInfoType} = useContext(HotelsContext);
 
     const navigate = useNavigate();
 
