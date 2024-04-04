@@ -55,30 +55,36 @@ const InfoView = () => {
 
   const handleClose = (event) => {
     event.preventDefault();
-    switch(infoType){
-      case "room":
-        navigate("/rooms");
-        break;
-      case "hotel":
-        navigate("/hotels");
-        break;
-      case "employee":
-        navigate("/employees");
-        break;
-      case "customer":
-        navigate("/customers");
-        break;
-      case "booking":
-        navigate("/bookings");
-        break;
+    if(user_role != 0){
+      switch(infoType){
+        case "room":
+          navigate("/rooms");
+          break;
+        case "hotel":
+          navigate("/hotels");
+          break;
+        case "employee":
+          navigate("/employees");
+          break;
+        case "customer":
+          navigate("/customers");
+          break;
+        case "booking":
+          navigate("/bookings");
+          break;
+      }
+    } else {
+    navigate("/booknow");
     }
   }
 
   const handlePrimary = () => {
     switch(infoType){
       case "room":
-        navigate(`/booknow/${selectedRoom.roomid}`);
+        navigate(`/${selectedRoom.roomid}/booknow`);
         break;
+      case "booking":
+        navigate(`/${selectedBooking.bookingid}/checkin`);
     }
     
   }

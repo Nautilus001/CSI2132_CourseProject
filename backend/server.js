@@ -492,7 +492,7 @@ app.get("/api/v1/customers/:id", async (req, res) => {
 });
 
 //Create a customer
-app.post("/api/v1/cusomers", async (req, res) => {
+app.post("/api/v1/customers", async (req, res) => {
     try {
         const q = `
         INSERT INTO Customers (FullName, Address, IDType, RegistrationDate)
@@ -803,19 +803,20 @@ app.get("/api/v1/bookings/:id", async (req, res) => {
 });
 
 //Create a booking
-app.post("/api/v1/booking", async (req, res) => {
+app.post("/api/v1/bookings", async (req, res) => {
     try {
         const q = `
-        INSERT INTO Customers (FullName, Address, IDType, RegistrationDate)
-        VALUES
-        ($1, $2, $3, $4) returning *
+        INSERT INTO Bookings (CustomerID, RoomID, CheckinDate, CheckoutDate, BookingDate) 
+        VALUES 
+            ($1, $2, $3, $4, $5) returning *;
         `;
 
         const result = await db.query(q, [
-            req.body.fullname,
-            req.body.address,
-            req.body.idtype,
-            req.body.registrationDate,
+            req.body.customerid,
+            req.body.roomid,
+            req.body.checkin,
+            req.body.checkout,
+            req.body.bookingdate
         ]);
 
         res.status(200).json({
@@ -885,6 +886,37 @@ app.delete("/api/v1/bookings/:id", async (req, res) => {
         res.status(500).json({
             error: "Internal Server Error",
         });
+    }
+});
+
+//Create a renting
+app.post("/api/v1/rentings", async (req, res) => {
+    try {
+        const q = `
+        INSERT INTO Rentings (CustomerID, RoomID, EmployeeID, CheckinDate, CheckoutDate, BookingDate)
+        VALUES 
+            ($1, $2, $3, $4, $5, $6) returning *;
+        `;
+
+        const result = await db.query(q, [
+            req.body.customerid,
+            req.body.roomid,
+            req.body.eid,
+            req.body.checkindate,
+            req.body.checkoutdate,
+            req.body.bookingdate
+        ]);
+
+        res.status(200).json({
+            status: "success",
+            results: result.rows.length,
+            data: {
+                customer: result.rows
+            }
+        })
+        console.log("renting created");
+    } catch (err) {
+        console.error(err.message);
     }
 });
 

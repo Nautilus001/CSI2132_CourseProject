@@ -14,6 +14,9 @@ import HotelsView from "./Routes/HotelsView/HotelsView";
 import BookingsView from "./Routes/BookingsView/BookingsView";
 import RoomsView from "./Routes/RoomsView/RoomsView";
 import MyBookingsView from "./Routes/MyBookingsView/MyBookingsView";
+import BookAction from "./Routes/BookAction/BookAction";
+import ConfirmationView from "./Routes/ConfirmationView/ConfirmationView";
+import CheckInView from "./Routes/CheckInView/CheckInView";
 
 const App = () => {
 
@@ -33,6 +36,9 @@ const App = () => {
                   <Route path="/:id/info" element={<InfoView />} />
                   <Route path="/:id/update" element={<UpdateView />} />
                   <Route path="/mybookings" element={<MyBookingsView />} />
+                  <Route path="/:id/booknow" element={<BookAction />} />
+                  <Route path="/confirmation" element={<ConfirmationView />} />
+                  <Route path="/:id/checkin" element={<CheckInView />} />
                 </Routes>
             </div>
         </BrowserRouter>
