@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { HotelsContext } from "../../context/HotelsContext";
 
-const Navbar = ({}) => {
+const Navbar = () => {
 
     const {user_role, setUserRole} = useContext(HotelsContext);
 

@@ -30,7 +30,22 @@ Delete          |   DELETE  |   /api/v1/[class]/:id
 //Get all hotels
 app.get("/api/v1/hotels", async (req, res) => {
     try{
-        const result = await db.query("select * from hotels order by hotelID");
+        const q = `
+            SELECT
+                H.HotelID,
+                H.HotelName,
+                H.Category,
+                H.HotelAddress,
+                H.NumRooms,
+                H.ContactEmail,
+                H.ContactPhone,
+                HC.ChainName
+            FROM
+                Hotels H
+            JOIN
+                HotelChains HC ON H.ChainID = HC.ChainID
+        `
+        const result = await db.query(q);
         res.status(200).json({
             status: "success",
             results: result.rows.length,
@@ -358,7 +373,7 @@ app.get("/api/v1/customers", async (req, res) => {
             status: "success",
             results: result.rows.length,
             data: {
-                customer: result.rows
+                customers: result.rows
             }
         })
         console.log("get all customers");
@@ -375,7 +390,7 @@ app.get("/api/v1/customers/:id", async (req, res) => {
             status: "success",
             results: result.rows.length,
             data: {
-                hotel: result.rows
+                customer: result.rows
             }
         })
         console.log("get one customer");
@@ -404,7 +419,7 @@ app.post("/api/v1/cusomers", async (req, res) => {
             status: "success",
             results: result.rows.length,
             data: {
-                hotel: result.rows
+                customer: result.rows
             }
         })
         console.log("customer created");
@@ -434,7 +449,7 @@ app.put("/api/v1/customers/:id", async (req, res) => {
             status: "success",
             results: result.rows.length,
             data: {
-                hotel: result.rows
+                customer: result.rows
             }
         })
         console.log("customer updated");
@@ -467,12 +482,25 @@ app.delete("/api/v1/customers/:id", async (req, res) => {
 //Get all employee
 app.get("/api/v1/employees", async (req, res) => {
     try{
-        const result = await db.query("select * from employee order by EID");
+        const q = `
+        SELECT
+            E.EID,
+            E.FullName,
+            E.Address,
+            E.SSN,
+            E.Role,
+            H.HotelName
+        FROM
+            Employee E
+        JOIN
+            Hotels H ON E.HotelID = H.HotelID;
+        `
+        const result = await db.query(q);
         res.status(200).json({
             status: "success",
             results: result.rows.length,
             data: {
-                hotels: result.rows
+                employees: result.rows
             }
         })
         console.log("get all employees");
@@ -489,7 +517,7 @@ app.get("/api/v1/employees/:id", async (req, res) => {
             status: "success",
             results: result.rows.length,
             data: {
-                hotel: result.rows
+                room: result.rows
             }
         })
         console.log("get one employee");
@@ -519,7 +547,7 @@ app.post("/api/v1/employees", async (req, res) => {
             status: "success",
             results: result.rows.length,
             data: {
-                hotel: result.rows
+                employee: result.rows
             }
         })
         console.log("employee created");
@@ -550,7 +578,7 @@ app.put("/api/v1/employees/:id", async (req, res) => {
             status: "success",
             results: result.rows.length,
             data: {
-                hotel: result.rows
+                employee: result.rows
             }
         })
         console.log("employee updated");
@@ -575,6 +603,140 @@ app.delete("/api/v1/employees/:id", async (req, res) => {
             status: "success",
         })
         console.log("employee deleted");
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
+//Get all bookings
+app.get("/api/v1/bookings", async (req, res) => {
+    try{
+        const q = `
+        SELECT
+            B.BookingID,
+            B.CustomerID,
+            B.RoomID,
+            B.CheckinDate,
+            B.CheckoutDate,
+            B.BookingDate,
+            R.RoomNumber,
+            H.HotelName,
+            C.FullName
+        FROM
+            Bookings B
+        JOIN
+            Rooms R ON R.RoomID = B.RoomID
+        JOIN 
+            Hotels H ON H.HotelID = R.HotelID
+        JOIN 
+            Customers C ON C.CustomerID = B.CustomerID
+        `;
+        const result = await db.query(q);
+        res.status(200).json({
+            status: "success",
+            results: result.rows.length,
+            data: {
+                bookings: result.rows
+            }
+        })
+        console.log("get all bookings");
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
+//Get ONE customer by ID
+app.get("/api/v1/bookings/:id", async (req, res) => {
+    try{
+        const result = await db.query("SELECT * FROM bookings WHERE bookingid = $1", [req.params.id]);
+        res.status(200).json({
+            status: "success",
+            results: result.rows.length,
+            data: {
+                bookings: result.rows
+            }
+        })
+        console.log("get one booking");
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
+//Create a customer
+app.post("/api/v1/booking", async (req, res) => {
+    try {
+        const q = `
+        INSERT INTO Customers (FullName, Address, IDType, RegistrationDate)
+        VALUES
+        ($1, $2, $3, $4) returning *
+        `;
+
+        const result = await db.query(q, [
+            req.body.fullname,
+            req.body.address,
+            req.body.idtype,
+            req.body.registrationDate,
+        ]);
+
+        res.status(200).json({
+            status: "success",
+            results: result.rows.length,
+            data: {
+                customer: result.rows
+            }
+        })
+        console.log("customer created");
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
+//Update a customer
+//We can use ID param because we are only updating a hotel that we know the id of
+app.put("/api/v1/customers/:id", async (req, res) => {
+    try {
+        const q = `
+        UPDATE customers SET FullName=$1, Address=$2, IDType=$3, RegistrationDate=$4
+        where roomID=$5 returning *
+        `;
+
+        const result = await db.query(q, [
+            req.body.fullname,
+            req.body.address,
+            req.body.idtype,
+            req.body.registrationDate,
+            req.params.id,
+        ]);
+
+        res.status(200).json({
+            status: "success",
+            results: result.rows.length,
+            data: {
+                customer: result.rows
+            }
+        })
+        console.log("customer updated");
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
+//Delete a Booking
+app.delete("/api/v1/customers/:id", async (req, res) => {
+    try {
+        const q = `
+        DELETE FROM customers
+        where customerID=$1
+        `;
+
+        const result = await db.query(q, [
+            req.params.id,
+        ]);
+
+        res.status(204).json({
+            status: "success",
+        })
+        console.log("customer deleted");
     } catch (err) {
         console.error(err.message);
     }

@@ -7,17 +7,14 @@ import Navbar from "./components/Navbar/Navbar";
 import { HotelsContextProvider } from "./context/HotelsContext";
 import BookNowView from "./Routes/BookNowView/BookNowView";
 import InfoView from "./Routes/InfoView/InfoView";
+import UpdateView from "./Routes/UpdateView/UpdateView";
+import EmployeesView from "./Routes/EmployeesView/EmployeesView";
+import CustomersView from "./Routes/CustomersView/CustomersView";
+import HotelsView from "./Routes/HotelsView/HotelsView";
+import BookingsView from "./Routes/BookingsView/BookingsView";
+import RoomsView from "./Routes/RoomsView/RoomsView";
 
 const App = () => {
-  //const [user_role, setUserRole] = useState(0);
-
-  // const handleRoleAssignment = (value) => {
-  //   setUserRole(value);
-  // };
-
-  // const handleRoleReset = () => {
-  //   setUserRole(0);
-  // };
 
   return (
       <HotelsContextProvider>
@@ -30,8 +27,13 @@ const App = () => {
                     element={<HomePage/>} 
                   />
                   <Route path="/booknow" element={<BookNowView />} />
-                  <Route path="/employee" element={<BookNowView />} />
-                  <Route path="/employee/rooms" element={<InfoView />} />
+                  <Route path="/employees" element={<EmployeesView />} />
+                  <Route path="/rooms" element={<RoomsView />} />
+                  <Route path="/customers" element={<CustomersView />} />
+                  <Route path="/bookings" element={<BookingsView />} />
+                  <Route path="/hotels" element={<HotelsView />} />
+                  <Route exact path="/:id/info" element={<InfoView />} />
+                  <Route path="/:id/update" element={<UpdateView />} />
                 </Routes>
             </div>
         </BrowserRouter>

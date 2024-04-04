@@ -12,17 +12,7 @@ const HomePage = () => {
 
     const handleRoleAssignment = (value) => {
         setUserRole(value);
-        switch(value) {
-            case 0:
-                navigate("/booknow");
-                break;
-            case 1:
-                navigate("/employee");
-                break;
-            case 2:
-                navigate("/admin");
-                break;
-        }
+        navigate("/booknow");
         console.log("User clicked:" + value);
     }
 

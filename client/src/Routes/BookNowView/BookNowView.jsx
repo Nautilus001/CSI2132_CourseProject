@@ -1,22 +1,25 @@
 import React, { useEffect, useContext } from "react";
-import { HotelsContext } from "../../context/HotelsContext";
 import HotelSearch from "../../apis/HotelSearch";
+import { HotelsContext } from "../../context/HotelsContext";
 import { useNavigate } from "react-router-dom";
 
 const BookNowView = ( ) => {
 
     const {rooms, setRooms} = useContext(HotelsContext);
     const {inputs, setInputs} = useContext(HotelsContext);
+    const {selectedRoom, setSelectedRoom} = useContext(HotelsContext);
+    const {user_role, setUserRole} = useContext(HotelsContext);
+    const {infoType, setInfoType} = useContext(HotelsContext);
+
     const navigate = useNavigate();
 
     useEffect(() => {
-        
         const fetchData = async () => {
             try {
                 const response = await HotelSearch.post("/rooms", inputs);
                 console.log(response.data.data);
                 setRooms(response.data.data.rooms);
-                console.log("Roomsss", rooms); 
+                console.log("Rooms:", rooms); 
             } catch (err) {
                 console.error(err.message);
             }
@@ -35,8 +38,10 @@ const BookNowView = ( ) => {
         console.log(inputs);
     }
 
-    const handleRoomClick = (value) => {
-        navigate(`/${value}/info`);
+    const handleRoomClick = (room) => {
+        setSelectedRoom(room)
+        setInfoType("room")
+        navigate(`/${room.roomid}/info`);
     }
 
     function extractCityName(address) {
@@ -214,7 +219,7 @@ const BookNowView = ( ) => {
                     <tbody>
                         {rooms.map((room) => {
                             return(
-                                <tr onClick={()=>{handleRoomClick(room.roomid)}} style={{cursor: "pointer"}}>
+                                <tr onClick={()=>{handleRoomClick(room)}} style={{cursor: "pointer"}}>
                                     <td className="align-middle">
                                         <div>
                                             <div>{room.hotelname}</div>
